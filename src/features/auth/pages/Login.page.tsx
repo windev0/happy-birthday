@@ -1,7 +1,7 @@
+import { LoginForm } from "@/features/auth/components/LoginForm";
 import { account, ID } from "@/lib/appwrite";
 import { GalleryVerticalEnd } from "lucide-react";
 import { useState } from "react";
-import { LoginForm } from "../components/LoginForm";
 
 const LoginPage = () => {
   const [loggedInUser, setLoggedInUser] = useState<null | Awaited<

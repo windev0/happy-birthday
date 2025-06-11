@@ -2,9 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
       "@/auth/*": ["./src/features/auth/*"],
-      "@/auth/components/*": ["./src/features/auth/components/*"]
+      "@/auth/components/*": ["./src/features/auth/components/*"],
+      "@/*": ["src/*"],
     }
   },
   "files": [],

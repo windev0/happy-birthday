@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
       "@/auth/*": ["./src/features/auth/*"],
+      "@/auth/components*": ["./src/features/auth/components/*"],
+      "@/*": ["./src/*"],
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
