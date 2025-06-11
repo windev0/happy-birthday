@@ -1,5 +1,5 @@
+import { account, ID } from "@/lib/appwrite";
 import { useState } from "react";
-import { account, ID } from "../../../lib/appwrite";
 
 const LoginPage = () => {
   const [loggedInUser, setLoggedInUser] = useState<null | Awaited<
@@ -26,7 +26,6 @@ const LoginPage = () => {
     console.log("createVerification", createVerification);
 
     console.log("verify_url", verify_url);
-
   }
 
   return (

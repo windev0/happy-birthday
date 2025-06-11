@@ -1,4 +1,4 @@
-import { account } from "../../../lib/appwrite";
+import { account } from "@/lib/appwrite";
 
 const VerificationPage = () => {
   const handleClick = async () => {

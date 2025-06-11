@@ -1,4 +1,4 @@
-import { account } from "../../../lib/appwrite";
+import { account } from "@/lib/appwrite";
 import { v4 as uuidv4 } from "uuid";
 
 const RegisterPage = () => {
