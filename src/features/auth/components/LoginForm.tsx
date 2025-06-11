@@ -11,12 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { singIn } from "@/auth/services/login.service";
+import { ROUTES } from "@/utils/constants";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+
   useEffect(() => {
     // Clear error message after 5 seconds
     if (error) {
@@ -43,6 +48,7 @@ export function LoginForm({
       // console.log("createVerification", createVerification);
 
       // console.log("verify_url", verify_url);
+      navigate(ROUTES.HOME);
     } catch (error: any) {
       console.error("Login failed:", error);
       // Handle login failure (e.g., show an error message)
@@ -66,7 +72,7 @@ export function LoginForm({
               await handleSubmit(e);
             }}
           >
-            {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
+            {error && <div className="mb-4 text-red-500 text-sm text-center">{error}</div>}
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
                 <Button variant="outline" className="w-full">
@@ -127,7 +133,7 @@ export function LoginForm({
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
+                <a href={ROUTES.REGISTER} className="underline underline-offset-4">
                   Sign up
                 </a>
               </div>

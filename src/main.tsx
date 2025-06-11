@@ -9,17 +9,18 @@ import RegisterPage from "@/auth/pages/Register.page.tsx";
 import VerificationPage from "@/auth/pages/Verification.page.tsx";
 import MainLayout from "@/layouts/MainLayout.tsx";
 import GetElement from "@/components/GetElement.tsx";
+import { ROUTES } from "@/utils/constants.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Router>
       <MainLayout>
         <Routes>
-          <Route path="/" element={<GetElement path="/app" />} />
-          <Route path="/app" element={<App />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/verify" element={<VerificationPage />} />
+          <Route path={ROUTES.HOME} element={<GetElement path="/app" />} />
+          <Route path={ROUTES.APP} element={<App />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.VERIFY} element={<VerificationPage />} />
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </MainLayout>
