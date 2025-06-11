@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "@/auth/*": ["./src/features/auth/*"],
-      "@/auth/components/*": ["./src/features/auth/components/*"],
       "@/*": ["src/*"],
     }
   },

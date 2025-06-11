@@ -1,7 +1,7 @@
 import { Client, Account } from "appwrite";
 export { ID } from "appwrite";
 
-export const client = new Client();
+const client = new Client();
 const projectId =
   import.meta.env.VITE_APPWRITE_PROJECT_ID || "653ba782463bbfa11327"; // Replace with your project ID
 const endpoint =
@@ -9,4 +9,6 @@ const endpoint =
 
 client.setEndpoint(endpoint).setProject(projectId); // Replace with your project ID
 
-export const account = new Account(client);
+const account = new Account(client);
+
+export { client, account, projectId, endpoint };

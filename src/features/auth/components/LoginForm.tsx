@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,11 +10,46 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { singIn } from "@/auth/services/login.service";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    // Clear error message after 5 seconds
+    if (error) {
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const user = await singIn({ email, password });
+      console.log("user", user);
+
+      // vérification
+      // const secret = "birthday"; // you can use any secret, here we use 'birthday' for simplicity
+      // const userId = user.$id;
+      // const verify_url = `http://localhost:5173/verify?userId=${userId}&secret=${secret}`;
+
+      // const createVerification = await account.createVerification(verify_url);
+      // console.log("createVerification", createVerification);
+
+      // console.log("verify_url", verify_url);
+    } catch (error: any) {
+      console.error("Login failed:", error);
+      // Handle login failure (e.g., show an error message)
+      setError(error ? error.message : "Login failed");
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -24,7 +60,13 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await handleSubmit(e);
+            }}
+          >
+            {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
                 <Button variant="outline" className="w-full">
@@ -57,6 +99,7 @@ export function LoginForm({
                   <Input
                     id="email"
                     type="email"
+                    name="email"
                     placeholder="m@example.com"
                     required
                   />
@@ -71,7 +114,12 @@ export function LoginForm({
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full">
                   Login

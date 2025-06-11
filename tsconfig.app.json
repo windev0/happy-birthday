@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/auth/*": ["./src/features/auth/*"],
       "@/auth/components*": ["./src/features/auth/components/*"],
+      "@/auth/*": ["./src/features/auth/*"],
       "@/*": ["./src/*"],
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
