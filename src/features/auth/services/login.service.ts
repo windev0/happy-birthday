@@ -1,22 +1,46 @@
 import type { LoginData, User } from "@/auth/utils/types";
 import { account } from "@/lib/appwrite";
+import { ROUTES } from "@/utils/constants";
+import type { OAuthProvider } from "appwrite";
 
-export async function singIn(data: LoginData): Promise<User | null> {
+export async function signInWithEmailPassword(
+  data: LoginData
+): Promise<User | null> {
   try {
     const { email, password } = data;
+    const session = await account.createEmailPasswordSession(email, password);
 
-    console.log("data", { email, password });
-    const session = await account.createEmailPasswordSession(email, password); // login with appwrite
+    if (!session.$id) return null;
 
-    if (session.$id) {
-      const user = await account.get();
-      window.localStorage.setItem("user", JSON.stringify(user));
-      window.localStorage.setItem("email", email);
-      return user;
-    }
-    return null;
+    const user = await account.get();
+    window.localStorage.setItem("user", JSON.stringify(user));
+    window.localStorage.setItem("email", email);
+    return user;
   } catch (error) {
     console.error("Login failed:", error);
+    throw error;
+  }
+}
+
+export async function signInWithOAuth(
+  provider: OAuthProvider
+): Promise<User | null> {
+  const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
+  const authCallbackUrl = baseUrl + ROUTES.AUTH_CALLBACK;
+  const onSuccessUrl = baseUrl + ROUTES.APP;
+
+  try {
+    account.createOAuth2Session(provider, onSuccessUrl, authCallbackUrl, [
+      "email",
+      "openid",
+      "profile",
+    ]);
+
+    const user = await account.get();
+    window.localStorage.setItem("user", JSON.stringify(user));
+    return user;
+  } catch (error) {
+    console.error("OAuth login failed:", error);
     throw error;
   }
 }

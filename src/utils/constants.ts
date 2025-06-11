@@ -1,14 +1,15 @@
 const ROUTES = {
   HOME: "/",
-  ABOUT: "/about",
-  CONTACT: "/contact",
   LOGIN: "/login",
   REGISTER: "/register",
-  DASHBOARD: "/dashboard",
-  PROFILE: "/profile",
-  SETTINGS: "/settings",
   VERIFY: "/verify",
   APP: "/app",
+  AUTH_CALLBACK: "/auth/callback",
 };
 
-export { ROUTES };
+const LOGIN_TYPE = {
+  EMAIL_PASSWORD: "email_password",
+  OAUTH: "oauth",
+};
+
+export { ROUTES,  LOGIN_TYPE };

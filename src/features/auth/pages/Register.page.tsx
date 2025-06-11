@@ -106,6 +106,7 @@ const RegisterPage = () => {
             <Button className="w-full">Register</Button>
           </form>
         </CardContent>
+        
         <CardContent className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
           <a href={ROUTES.LOGIN} className="underline underline-offset-4">
