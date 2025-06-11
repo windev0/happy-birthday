@@ -1,10 +1,12 @@
 import { Client, Account } from "appwrite";
+export { ID } from "appwrite";
 
 export const client = new Client();
+const projectId =
+  import.meta.env.VITE_APPWRITE_PROJECT_ID || "653ba782463bbfa11327"; // Replace with your project ID
+const endpoint =
+  import.meta.env.VITE_APPWRITE_ENDPOINT || "https://cloud.appwrite.io/v1"; // Replace with your Appwrite endpoint
 
-client
-  .setEndpoint("https://<REGION>.cloud.appwrite.io/v1")
-  .setProject("<PROJECT_ID>"); // Replace with your project ID
+client.setEndpoint(endpoint).setProject(projectId); // Replace with your project ID
 
 export const account = new Account(client);
-export { ID } from "appwrite";
