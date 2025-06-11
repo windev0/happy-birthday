@@ -1,8 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import "./App.css";
+import App from "./App.tsx";
 import LoginPage from "./features/auth/pages/Login.page.tsx";
 import RegisterPage from "./features/auth/pages/Register.page.tsx";
 import VerificationPage from "./features/auth/pages/Verification.page.tsx";

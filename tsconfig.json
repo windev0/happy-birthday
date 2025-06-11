@@ -1,4 +1,12 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/auth/*": ["./src/features/auth/*"],
+      "@/auth/components/*": ["./src/features/auth/components/*"]
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

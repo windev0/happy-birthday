@@ -1,5 +1,7 @@
 import { account, ID } from "@/lib/appwrite";
+import { GalleryVerticalEnd } from "lucide-react";
 import { useState } from "react";
+import { LoginForm } from "../components/LoginForm";
 
 const LoginPage = () => {
   const [loggedInUser, setLoggedInUser] = useState<null | Awaited<
@@ -29,124 +31,16 @@ const LoginPage = () => {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: 400,
-        margin: "40px auto",
-        padding: 24,
-        border: "1px solid #ddd",
-        borderRadius: 8,
-        boxShadow: "0 2px 8px #eee",
-      }}
-    >
-      <p
-        style={{
-          fontWeight: "bold",
-          fontSize: 18,
-          marginBottom: 24,
-          textAlign: "center",
-        }}
-      >
-        {loggedInUser ? `Logged in as ${loggedInUser.name}` : "Not logged in"}
-      </p>
-
-      <form style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            padding: 10,
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            fontSize: 16,
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            padding: 10,
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            fontSize: 16,
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{
-            padding: 10,
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            fontSize: 16,
-          }}
-        />
-
-        <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-          <button
-            type="button"
-            onClick={() => login(email, password)}
-            style={{
-              flex: 1,
-              padding: 10,
-              borderRadius: 4,
-              border: "none",
-              background: "#1976d2",
-              color: "#fff",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Login
-          </button>
-
-          <button
-            type="button"
-            onClick={async () => {
-              await account.create(ID.unique(), email, password, name);
-              login(email, password);
-            }}
-            style={{
-              flex: 1,
-              padding: 10,
-              borderRadius: 4,
-              border: "none",
-              background: "#43a047",
-              color: "#fff",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Register
-          </button>
-
-          <button
-            type="button"
-            onClick={async () => {
-              await account.deleteSession("current");
-              setLoggedInUser(null);
-            }}
-            style={{
-              flex: 1,
-              padding: 10,
-              borderRadius: 4,
-              border: "none",
-              background: "#e53935",
-              color: "#fff",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </form>
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <a href="#" className="flex items-center gap-2 self-center font-medium">
+          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+            <GalleryVerticalEnd className="size-4" />
+          </div>
+          Acme Inc.
+        </a>
+        <LoginForm />
+      </div>
     </div>
   );
 };
