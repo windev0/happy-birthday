@@ -18,6 +18,7 @@ import {
   signInWithOAuth,
 } from "@/auth/services/login.service";
 import { ROUTES, LOGIN_TYPE } from "@/utils/constants";
+import { account } from "@/lib/appwrite";
 
 export function LoginForm({
   className,
@@ -52,8 +53,16 @@ export function LoginForm({
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
 
-        await signInWithEmailPassword({ email, password });
-        navigate(ROUTES.HOME);
+        const user = await signInWithEmailPassword({ email, password });
+        // si l'utilisateur n'est pas vérifié, on le redirige vers la page de vérification
+        if (user?.emailVerification && !user.emailVerification) {
+const verificationURL= 
+          await account.createVerification()
+          navigate(ROUTES.VERIFY, { replace: true });
+          return;
+        }
+
+        navigate(ROUTES.HOME, { replace: true });
         return;
       }
     } catch (error: any) {
