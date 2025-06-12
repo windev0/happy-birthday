@@ -1,4 +1,4 @@
-import  Navbar  from "@/components/NavBar";
+import Navbar from "@/components/NavBar";
 import { type ReactNode } from "react";
 
 interface MainLayoutProps {
@@ -11,7 +11,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <header>
         <Navbar />
       </header>
-      <main>{children}</main>
+      <body>
+        <main>{children}</main>
+      </body>
     </>
   );
 };

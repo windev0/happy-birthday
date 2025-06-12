@@ -26,6 +26,8 @@ const Navbar = () => {
         "_blank",
         "width=500,height=600"
       );
+      
+      window.localStorage.clear(); // Nettoie le localStorage
 
       // Fermer la fenêtre automatiquement après quelques secondes
       setTimeout(() => {

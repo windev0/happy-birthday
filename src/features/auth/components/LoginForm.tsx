@@ -18,7 +18,7 @@ import {
   signInWithOAuth,
 } from "@/auth/services/login.service";
 import { ROUTES, LOGIN_TYPE } from "@/utils/constants";
-import { account } from "@/lib/appwrite";
+import { sendVerificationEmail } from "@/auth/services/verify-user.service";
 
 export function LoginForm({
   className,
@@ -54,15 +54,26 @@ export function LoginForm({
         const password = formData.get("password") as string;
 
         const user = await signInWithEmailPassword({ email, password });
-        // si l'utilisateur n'est pas vérifié, on le redirige vers la page de vérification
-        if (user?.emailVerification && !user.emailVerification) {
-const verificationURL= 
-          await account.createVerification()
-          navigate(ROUTES.VERIFY, { replace: true });
+
+        if (!user?.$id) {
+          setError("Login failed");
+          return;
+        }
+        if (user?.emailVerification) {
+          navigate(ROUTES.HOME, { replace: true }); // il s'agit d'un utilisateur déjà vérifié
           return;
         }
 
-        navigate(ROUTES.HOME, { replace: true });
+        // Vérification du compte
+        const isSuccess = await sendVerificationEmail(user?.$id);
+        if (isSuccess) {
+          // Redirection vers la page d'attente de vérification
+          navigate(ROUTES.WAITING_VERIFICATION, {
+            replace: true,
+            state: { email: user?.email },
+          });
+          return;
+        }
         return;
       }
     } catch (error: any) {

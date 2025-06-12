@@ -5,6 +5,7 @@ const ROUTES = {
   VERIFY: "/verify",
   APP: "/app",
   AUTH_CALLBACK: "/auth/callback",
+  WAITING_VERIFICATION: "/waiting-verification",
 };
 
 const LOGIN_TYPE = {
@@ -12,4 +13,4 @@ const LOGIN_TYPE = {
   OAUTH: "oauth",
 };
 
-export { ROUTES,  LOGIN_TYPE };
+export { ROUTES, LOGIN_TYPE };

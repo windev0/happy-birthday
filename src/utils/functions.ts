@@ -1,5 +1,8 @@
+import type { User } from "@/auth/utils/types";
+
 function isAuthenticated(): boolean {
-  return !!localStorage.getItem("user");
+  const user: User | null = JSON.parse(localStorage.getItem("user") || "null");
+  return user?.emailVerification && user?.$id ? true : false;
 }
 
 export { isAuthenticated };
