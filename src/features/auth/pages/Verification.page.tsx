@@ -6,11 +6,8 @@ const VerificationPage = () => {
     const secret = urlParams.get("secret") ?? "";
     const userId = urlParams.get("userId") ?? "";
 
-    console.log("object", { userId, secret });
-
-    // verugy
-    const verificationResp = await account.updateVerification(userId, secret);
-    console.log("verificationResp", verificationResp);
+    await account.updateVerification(userId, secret);
+    // console.log("verificationResp", verificationResp);
   };
   return (
     <>

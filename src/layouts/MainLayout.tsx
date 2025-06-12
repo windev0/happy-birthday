@@ -1,16 +1,18 @@
-import React, { type ReactNode } from "react";
+import  Navbar  from "@/components/NavBar";
+import { type ReactNode } from "react";
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="main-layout">
-      {/* You can add a header or sidebar here if needed */}
+    <>
+      <header>
+        <Navbar />
+      </header>
       <main>{children}</main>
-      {/* You can add a footer here if needed */}
-    </div>
+    </>
   );
 };
 

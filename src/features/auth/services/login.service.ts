@@ -37,9 +37,6 @@ export function signInWithOAuth(provider: OAuthProvider): boolean {
       "openid",
       "profile",
     ]);
-
-    // const user = await account.get();
-    // window.localStorage.setItem("user", JSON.stringify(user));
     return true;
   } catch (error) {
     console.error("OAuth login failed:", error);

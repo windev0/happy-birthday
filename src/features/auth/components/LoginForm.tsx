@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { OAuthProvider } from "appwrite";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,13 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  fetchLoggedInUser,
   signInWithEmailPassword,
   signInWithOAuth,
 } from "@/auth/services/login.service";
 import { ROUTES, LOGIN_TYPE } from "@/utils/constants";
-import { useNavigate } from "react-router-dom";
-import { OAuthProvider } from "appwrite";
 
 export function LoginForm({
   className,
@@ -41,14 +41,10 @@ export function LoginForm({
   ) => {
     try {
       if (loginType === LOGIN_TYPE.OAUTH && provider) {
-        console.log("OAuth login initiated with provider:", provider);
-        const isRedirectToOAuth = signInWithOAuth(provider);
-        console.log('isRedirectToOAuth', isRedirectToOAuth);
-        if (isRedirectToOAuth) {
-          // const user = await fetchLoggedInUser();
-          console.log("fetchLoggedInUser = user", );
+        if (provider === OAuthProvider.Apple) {
+          return; // A compéter après
         }
-        console.log("signInWithOAuth = user", isRedirectToOAuth);
+        signInWithOAuth(provider);
         return;
       } else if (loginType === LOGIN_TYPE.EMAIL_PASSWORD) {
         const form = event.currentTarget as HTMLFormElement;
@@ -56,9 +52,7 @@ export function LoginForm({
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
 
-        const user = await signInWithEmailPassword({ email, password });
-        console.log("signInWithEmailPassword = user", user);
-
+        await signInWithEmailPassword({ email, password });
         navigate(ROUTES.HOME);
         return;
       }
