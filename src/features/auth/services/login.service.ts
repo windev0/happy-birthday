@@ -25,9 +25,10 @@ export async function signInWithEmailPassword(
 export function signInWithOAuth(provider: OAuthProvider): boolean {
   const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
   const authCallbackUrl = baseUrl + ROUTES.AUTH_CALLBACK;
-  const onSuccessUrl = baseUrl + ROUTES.APP;
+  const onSuccessUrl = baseUrl + ROUTES.HOME;
 
   try {
+    console.log('object');
     if (!provider) {
       return false;
     }
