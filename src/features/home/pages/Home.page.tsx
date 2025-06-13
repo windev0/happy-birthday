@@ -1,9 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
+import { account } from "@/lib/appwrite";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    account
+      .get()
+      .then((value) => {
+        value?.$id &&
+          window.localStorage.setItem("user", JSON.stringify(value));
+      })
+      .catch(() => console.error("Effor fetching user"));
+  }, []);
 
   return (
     <MainLayout>
@@ -25,7 +36,7 @@ const HomePage = () => {
               Créer un message
             </Button>
           </div>
-          <div >
+          <div>
             <img
               src="/assets/images/img1.jpg"
               alt="Illustration festive"
