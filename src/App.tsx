@@ -1,4 +1,5 @@
 import { fetchLoggedInUser } from "@/auth/services/login.service";
+import EventListPage from "@/features/event/list/pages/EventList.page";
 import MainLayout from "@/layouts/MainLayout";
 import { useEffect } from "react";
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <MainLayout>
+      <EventListPage />
       <h1>Hello world</h1>
     </MainLayout>
   );
