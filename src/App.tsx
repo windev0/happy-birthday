@@ -17,8 +17,8 @@ function App() {
 
   return (
     <MainLayout>
-      <EventListPage />
       <h1>Hello world</h1>
+      <EventListPage />
     </MainLayout>
   );
 }

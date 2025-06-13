@@ -6,6 +6,10 @@ const projectId =
   import.meta.env.VITE_APPWRITE_PROJECT_ID || "653ba782463bbfa11327"; // Replace with your project ID
 const endpoint =
   import.meta.env.VITE_APPWRITE_ENDPOINT || "https://cloud.appwrite.io/v1"; // Replace with your Appwrite endpoint
+const FESTIVE_DATABASE_ID =
+  import.meta.env.FESTIVE_DATABASE_ID || "684c243d001912355795";
+const EVENTS_COLLECTION_ID =
+  import.meta.env.EVENTS_COLLECTION_ID || "684c2a22000e7b2dea09";
 
 client.setEndpoint(endpoint).setProject(projectId); // Replace with your project ID
 
@@ -31,4 +35,12 @@ const databases = new Databases(client);
 //   }
 // };
 
-export { client, account, projectId, endpoint, databases };
+export {
+  client,
+  account,
+  projectId,
+  endpoint,
+  databases,
+  FESTIVE_DATABASE_ID,
+  EVENTS_COLLECTION_ID,
+};

@@ -1,31 +1,30 @@
-// Exemple : src/pages/EventList.jsx
-import { databases } from "@/lib/appwrite";
 import { useEffect, useState } from "react";
+import {
+  databases,
+  EVENTS_COLLECTION_ID,
+  FESTIVE_DATABASE_ID,
+} from "@/lib/appwrite";
 
 interface Event {
   $id: string;
   title: string;
   description: string;
   image: string;
-  date: Date;
-  $created_At: Date;
-  $updated_At: Date;
+  date: string;
+  $createdAt: string;
+  $updatedAt: string;
 }
-const DATABASE_ID = "684c243d001912355795";
-const COLLECTION_ID = "684c2a22000e7b2dea09";
 
 const EventListPage = () => {
-  const [events, setEvents] = useState<any>([]);
+  const [events, setEvents] = useState<Event[] | any>([]);
   const [loading, setLoading] = useState(true);
 
   const getEvents = async () => {
     try {
-      const response = await databases.listDocuments(
-        DATABASE_ID,
-        COLLECTION_ID
-        
-      );
-      setEvents(response.documents);
+      const data = await databases
+        .listDocuments(FESTIVE_DATABASE_ID, EVENTS_COLLECTION_ID)
+        .then((resp) => resp.documents);
+      setEvents(data);
     } catch (error) {
       console.error("Erreur lors du chargement des événements :", error);
     } finally {
@@ -47,7 +46,15 @@ const EventListPage = () => {
           <li key={event.$id}>
             <h3>{event.title}</h3>
             <p>{event.description}</p>
-            <small>{event.date.toDateString()}</small>
+            <small>{event.date}</small>
+            <br />
+            <small>cret {event.$createdAt}</small>
+            <br />
+
+            <small>updt {event.$updatedAt}</small>
+            <br />
+
+            <img src={event.image} alt="image" height={80} width={80} />
           </li>
         ))}
       </ul>
