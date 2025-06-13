@@ -26,13 +26,13 @@ const Navbar = () => {
         "_blank",
         "width=500,height=600"
       );
-      
+
       window.localStorage.clear(); // Nettoie le localStorage
 
       // Fermer la fenêtre automatiquement après quelques secondes
       setTimeout(() => {
         logoutWindow?.close();
-        navigate(ROUTES.LOGIN);
+        navigate(ROUTES.HOME);
       }, 2000);
     } catch (error) {
       console.error("Erreur lors de la déconnexion :", error);
@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-900 text-white">
       <h1 className="text-xl font-bold">Happy Birthday</h1>
-      {user && (
+      {user ? (
         <div className="flex items-center gap-4">
           <span className="text-sm">{user.name}</span>
           <button
@@ -52,6 +52,13 @@ const Navbar = () => {
             Logout
           </button>
         </div>
+      ) : (
+        <>
+          <h1>non connecté</h1>
+          <h1>
+            <a href={ROUTES.LOGIN}>Connexion</a>
+          </h1>
+        </>
       )}
     </nav>
   );
