@@ -6,11 +6,13 @@ import type { OAuthProvider } from "appwrite";
 export async function signInWithEmailPassword(
   data: LoginData
 ): Promise<User | null> {
+  // Tentative de suppression des sessions existantes (sécurité)
+  await deleteSessions();
+
   try {
     if (!data) {
       return null;
     }
-    await account.deleteSessions();
 
     const { email, password } = data;
     const session = await account.createEmailPasswordSession(email, password);
@@ -34,8 +36,10 @@ export async function signInWithOAuth(
   const authCallbackUrl = baseUrl + ROUTES.AUTH_CALLBACK;
   const onSuccessUrl = baseUrl + ROUTES.HOME;
 
+  // Tentative de suppression des sessions existantes (sécurité)
+  await deleteSessions();
+
   try {
-    await account.deleteSessions();
     if (!provider) {
       return false;
     }
@@ -60,5 +64,26 @@ export async function fetchLoggedInUser(): Promise<User | null> {
   } catch (err) {
     console.error("Erreur lors de la récupération de l'utilisateur :", err);
     return null;
+  }
+}
+
+async function deleteSessions() {
+  try {
+    await account.deleteSessions();
+    console.log("Sessions supprimées avec succès.");
+  } catch (error: any) {
+    // Si l'erreur indique qu'il n'y a pas de session active, on continue quand même
+    if (
+      error?.type === "general_unauthorized_scope" ||
+      error?.type === "user_session_not_found"
+    ) {
+      console.warn("Aucune session active à supprimer, on continue.");
+    } else {
+      console.error(
+        "Erreur inattendue lors de la suppression des sessions :",
+        error
+      );
+      // ⚠️ Tu peux décider ici de continuer quand même, ou non
+    }
   }
 }
