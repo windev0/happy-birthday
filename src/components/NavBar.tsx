@@ -12,10 +12,15 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    account
-      .get()
-      .then(setUser)
-      .catch(() => setUser(null));
+    const getUser = JSON.parse(window.localStorage.getItem("user") ?? "");
+    if (getUser) {
+      setUser(getUser);
+    } else {
+      account
+        .get()
+        .then(setUser)
+        .catch(() => setUser(null));
+    }
   }, []);
 
   const handleLogout = async () => {

@@ -8,7 +8,7 @@ import Step5 from "@/features/event/components/Step5";
 import MainLayout from "@/layouts/MainLayout";
 
 export type FormDataType = {
-  occasion: string;
+  title: string;
   category: string;
   duration: string;
   photos: File[];
@@ -17,7 +17,7 @@ export type FormDataType = {
 };
 
 const initialData: FormDataType = {
-  occasion: "",
+  title: "",
   category: "",
   duration: "",
   photos: [],

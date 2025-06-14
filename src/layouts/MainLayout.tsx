@@ -12,10 +12,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <header>
         <Navbar />
       </header>
-      <body>
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <main>{children}</main>
+      <Footer />
     </>
   );
 };
