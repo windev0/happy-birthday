@@ -8,13 +8,29 @@ import { ROUTES } from "@/utils/constants";
 const HomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    account
-      .get()
-      .then((value) => {
-        value?.$id &&
-          window.localStorage.setItem("user", JSON.stringify(value));
-      })
-      .catch(() => console.error("Effor fetching user"));
+    try {
+      account
+        .get()
+        .then((value) => {
+          value?.$id &&
+            window.localStorage.setItem("user", JSON.stringify(value));
+        })
+        .catch(() => console.error("Effor fetching user"));
+    } catch (error: any) {
+      // Si l'erreur indique qu'il n'y a pas de session active, on continue quand même
+      if (
+        error?.type === "general_unauthorized_scope" ||
+        error?.type === "user_session_not_found"
+      ) {
+        console.warn("Aucune session active à supprimer, on continue.");
+      } else {
+        console.error(
+          "Erreur inattendue lors de la suppression des sessions :",
+          error
+        );
+        // ⚠️ Tu peux décider ici de continuer quand même, ou non
+      }
+    }
   }, []);
 
   return (
