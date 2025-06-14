@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/NavBar";
 import { type ReactNode } from "react";
 
@@ -13,6 +14,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       </header>
       <body>
         <main>{children}</main>
+        <Footer />
       </body>
     </>
   );
