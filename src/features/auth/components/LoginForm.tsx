@@ -45,7 +45,7 @@ export function LoginForm({
         if (provider === OAuthProvider.Apple) {
           return; // A compéter après
         }
-        signInWithOAuth(provider);
+        await signInWithOAuth(provider);
         return;
       } else if (loginType === LOGIN_TYPE.EMAIL_PASSWORD) {
         const form = event.currentTarget as HTMLFormElement;

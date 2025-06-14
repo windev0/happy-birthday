@@ -7,6 +7,11 @@ export async function signInWithEmailPassword(
   data: LoginData
 ): Promise<User | null> {
   try {
+    if (!data) {
+      return null;
+    }
+    await account.deleteSessions();
+
     const { email, password } = data;
     const session = await account.createEmailPasswordSession(email, password);
 
@@ -22,13 +27,15 @@ export async function signInWithEmailPassword(
   }
 }
 
-export function signInWithOAuth(provider: OAuthProvider): boolean {
+export async function signInWithOAuth(
+  provider: OAuthProvider
+): Promise<boolean> {
   const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
   const authCallbackUrl = baseUrl + ROUTES.AUTH_CALLBACK;
   const onSuccessUrl = baseUrl + ROUTES.HOME;
 
   try {
-    console.log('object');
+    await account.deleteSessions();
     if (!provider) {
       return false;
     }
