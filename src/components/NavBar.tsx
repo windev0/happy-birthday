@@ -20,15 +20,15 @@ const Navbar = () => {
       await account.deleteSession("current");
       setUser(null);
 
-      const logoutWindow = window.open(
-        "https://accounts.google.com/Logout",
-        "_blank",
-        "width=500,height=600"
-      );
+      // const logoutWindow = window.open(
+      //   "https://accounts.google.com/Logout",
+      //   "_blank",
+      //   "width=500,height=600"
+      // );
 
       window.localStorage.clear();
       setTimeout(() => {
-        logoutWindow?.close();
+        // logoutWindow?.close();
         navigate(ROUTES.HOME);
       }, 2000);
     } catch (error) {
