@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 import { account } from "@/lib/appwrite";
 import { useEffect } from "react";
+import { ROUTES } from "@/utils/constants";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const HomePage = () => {
             </p>
             <Button
               className="text-white cursor-pointer bg-blue-600 hover:bg-blue-500"
-              onClick={() => navigate("/create")}
+              onClick={() => navigate(ROUTES.CREATE_EVENT)}
             >
               Créer un message
             </Button>

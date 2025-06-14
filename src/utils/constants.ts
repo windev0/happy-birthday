@@ -6,6 +6,7 @@ const ROUTES = {
   APP: "/app",
   AUTH_CALLBACK: "/auth/callback",
   WAITING_VERIFICATION: "/waiting-verification",
+  CREATE_EVENT: "/create-event",
 };
 
 const LOGIN_TYPE = {

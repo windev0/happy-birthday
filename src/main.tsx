@@ -16,6 +16,7 @@ import WaitingVerificationPage from "@/auth/pages/WaitingVerification.page.tsx";
 import { Toaster } from "sonner";
 import ProtectedRoute from "@/components/ProtectedRoutes.tsx";
 import HomePage from "@/features/home/pages/Home.page.tsx";
+import CreateEventForm from "@/features/event/components/CreateEventForm.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -37,6 +38,14 @@ createRoot(document.getElementById("root")!).render(
           element={
             <ProtectedRoute>
               <App />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CREATE_EVENT}
+          element={
+            <ProtectedRoute>
+              <CreateEventForm />
             </ProtectedRoute>
           }
         />
