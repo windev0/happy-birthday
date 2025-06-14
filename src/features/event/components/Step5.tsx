@@ -75,6 +75,7 @@ const Step5 = ({ prev, data }: Props) => {
                 className="hidden"
                 onChange={(e) => {
                   // Add photo
+                  console.log("object", e);
                   alert("Ajout de photo non implémenté ici.");
                 }}
               />
@@ -113,6 +114,7 @@ const Step5 = ({ prev, data }: Props) => {
                   className="hidden"
                   onChange={(e) => {
                     // Add music
+                    console.log("object", e);
                     alert("Ajout de musique non implémenté ici.");
                   }}
                 />
